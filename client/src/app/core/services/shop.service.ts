@@ -15,7 +15,11 @@ export class ShopService {
   types: string[] = [];
   brands: string[] = [];
 
-  getProducts(shopParams: ShopParams ) {
+  getProduct(id: number) {
+    return this.http.get<Product>(this.baseUrl + 'products/' + id);
+  }
+
+  getProducts(shopParams: ShopParams) {
     let params = new HttpParams();
 
     if (shopParams.brands.length > 0) {
@@ -30,7 +34,6 @@ export class ShopService {
     if (shopParams.search) {
       params = params.append('search', shopParams.search);
     }
-
 
     params = params.append('pageSize', shopParams.pageSize);
     params = params.append('pageIndex', shopParams.pageNumber);
