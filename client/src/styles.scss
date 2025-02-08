@@ -2,6 +2,8 @@
 
 @import "tailwindcss";
 
+
+
 $customTheme: mat.define-theme();
 
 @include mat.core();
@@ -19,4 +21,16 @@ $customTheme: mat.define-theme();
 
 .container{
   @apply mx-auto max-w-screen-2xl
+}
+
+.text-primary{
+  color: #7d0ffa;
+}
+
+button.match-input-height{
+  height: var(--mat-form-field-container-height) !important;
+}
+
+:root {
+  --tw-important: 1;
 }
