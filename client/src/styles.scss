@@ -2,51 +2,65 @@
 
 @import "tailwindcss";
 
-
-
 $customTheme: mat.define-theme();
 
 @include mat.core();
 
 .custom-theme {
   @include mat.all-component-themes($customTheme);
-  //override the button styles
-  .mdc-button,
-  .mdc-raised-button,
-  .mdc-stroked-button,
-  .mdc-flat-button {
+
+  // Ajuster seulement les boutons qui en ont besoin
+  .mdc-button {
     @apply rounded-md;
   }
+
+  .mdc-stroked-button {
+    border-width: 1px !important;
+    border-color: gray !important;
+    border-style: solid !important;
+    border-radius: 6px !important; // Même effet que rounded-md
+  }
+  
 }
 
-.container{
-  @apply mx-auto max-w-screen-2xl
-}
 
-.text-primary{
-  color: #7d0ffa;
-}
 
-button.match-input-height{
-  height: var(--mat-form-field-container-height) !important;
+@layer components {
+  .container {
+    @apply mx-auto max-w-screen-2xl;
+  }
+
+  .text-primary {
+    color: #7d0ffa;
+  }
+
+  button.match-input-height {
+    height: var(--mat-form-field-container-height) !important;
+  }
+
+  button[mat-stroked-button] {
+    @apply border border-gray-400; // Forcer la bordure Tailwind sur Material
+  }
+  
 }
 
 :root {
   --tw-important: 1;
 }
 
-.mdc-notched-outline__notch{
+.mdc-notched-outline__notch {
   border-right-style: none !important;
 }
 
-.mat-mdc-snack-bar-container.snack-error{
+.mat-mdc-snack-bar-container.snack-error {
   --mdc-snackbar-container-color: red;
   --mat-snack-bar-bar-button-color: #fff;
   --mdc-snackbar-supporting-text-color: #fff;
 }
 
-.mat-mdc-snack-bar-container.snack-success{
+.mat-mdc-snack-bar-container.snack-success {
   --mdc-snackbar-container-color: green;
   --mat-snack-bar-bar-button-color: #fff;
   --mdc-snackbar-supporting-text-color: #fff;
 }
+
