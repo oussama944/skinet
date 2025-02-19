@@ -1,0 +1,25 @@
+<mat-form-field appearance="outline" class="w-full mb-4">
+    <mat-label>{{ label }}</mat-label>
+    <input
+      [formControl]="control"
+      [type]="isPasswordField() ? (hide ? 'password' : 'text') : type"
+      placeholder="{{ label }}"
+      matInput
+    />
+
+    @if (isPasswordField()) {
+      <button mat-icon-button (click)="togglePassword($event)" matSuffix>
+        <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+    } 
+
+    @if (control.hasError('required')) {
+      <mat-error>{{ label }} is required</mat-error>
+    }
+    @if (control.hasError('email')) {
+      <mat-error>Invalid email address</mat-error>
+    }
+    @if (control.hasError('pattern')) {
+      <mat-error>{{ getPatternErrorMessage() }}</mat-error>
+    }
+  </mat-form-field>
