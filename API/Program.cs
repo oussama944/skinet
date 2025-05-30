@@ -10,6 +10,16 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+// Ajouter la configuration HTTPS
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(5001, listenOptions =>
+    {
+        listenOptions.UseHttps("Certificates/localhost.pfx", "YourPassword");
+    });
+});
+
+
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -21,6 +31,7 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IUnitOfWork,UnitOfWork>();
 builder.Services.AddCors();
 //add redis singleton
 builder.Services.AddSingleton<IConnectionMultiplexer>(config =>
